@@ -1,6 +1,11 @@
 "use strict";
 
-const todos = ["aaa", "bbb", "ccc", "ddd"];
+const todos = [
+    { text: "aaa", isCompleted: false },
+    { text: "bbb", isCompleted: false },
+    { text: "ccc", isCompleted: false },
+    { text: "ddd", isCompleted: false },
+];
 
 const todoList = document.querySelector("#todo-list");
 const todoForm = document.querySelector(".todo-input");
@@ -18,14 +23,23 @@ function displayTodo(todos) {
     todos.forEach((todo) => {
         const todoItem = document.createElement("div");
         todoItem.classList.add("todo-item")
+        todoItem.classList.toggle("completed", todo.isCompleted);
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.classList.add("todo-checkbos")
+        checkbox.classList.add("todo-checkbox")
+        checkbox.checked = todo.isCompleted;
 
         const todoText = document.createElement("span");
         todoText.classList.add("todo-text");
-        todoText.textContent = todo;
+        todoText.textContent = todo.text;
+
+        // チェックボックスイベントリスナー
+        checkbox.addEventListener("change", () => {
+            // 
+            todo.isCompleted = checkbox.checked;
+            todoItem.classList.toggle("completed", todo.isCompleted);
+        });
 
         const deleteButton = document.createElement("button");
         deleteButton.classList.add("todo-delete-button");
@@ -48,14 +62,12 @@ todoForm.addEventListener("submit", (event) => {
         return;
     }
 
-    todos.push(todo);
+    todos.push({ text: todo, isCompleted: false });
     displayTodo(todos);
     todoInputField.value = "";
     todoInputField.focus();
 });
 
-
-// チェックボックスのイベントリスナー
 
 // 削除ボタンのイベントリスナー
 

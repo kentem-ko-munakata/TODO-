@@ -88,3 +88,9 @@
     cursor: pointer;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }
+
+
+.todo-item.completed .todo-text {
+    color: #999;
+    text-decoration: line-through;
+}

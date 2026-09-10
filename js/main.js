@@ -3,8 +3,8 @@
 const todos = ["aaa", "bbb", "ccc", "ddd"];
 
 const todoList = document.querySelector("#todo-list");
-const todoForm = document.querySelector("#todo-form")
-const todoInputField = document.querySelector("#todo-input-field")
+const todoForm = document.querySelector(".todo-input");
+const todoInputField = document.querySelector("#todo-input-field");
 
 // 初期表示
 displayTodo(todos)
@@ -38,6 +38,22 @@ function displayTodo(todos) {
 
 
 // 追加ボタンのイベントリスナー
+todoForm.addEventListener("submit", (event) => {
+    // 送信時のページ更新防止
+    event.preventDefault();
+
+    // 空白除去したtodo取得
+    const todo = todoInputField.value.trim();
+    if (todo === "") {
+        return;
+    }
+
+    todos.push(todo);
+    displayTodo(todos);
+    todoInputField.value = "";
+    todoInputField.focus();
+});
+
 
 // チェックボックスのイベントリスナー
 

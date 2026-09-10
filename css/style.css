@@ -21,4 +21,40 @@
 
 .header-button {
     font-size: 16px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.todo-checkbox{
+    /* flex: 
+        grow: 幅ある際にどれだけ伸びるか
+        shrink: 幅がない際にどれだけ縮むか
+        basis: 初期幅（width）
+     */
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.todo-text {
+    /* 余り幅を受け取る */
+    flex: 1 1 auto;
+    font-size: 16px;
+    overflow-wrap: anywhere; /* 改行 */
+}
+
+.todo-delete-button {
+    flex: 0 0 auto;
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
 }

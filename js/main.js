@@ -10,6 +10,7 @@ const todos = [
 const todoList = document.querySelector("#todo-list");
 const todoForm = document.querySelector(".todo-input");
 const todoInputField = document.querySelector("#todo-input-field");
+const purgeButton = document.querySelector("#purge-button")
 
 // 初期表示
 displayTodo(todos)
@@ -66,8 +67,7 @@ todoForm.addEventListener("submit", (event) => {
     if (todo === "") {
         return;
     }
-
-    // TODOの長さ取得
+    
     todos.push({
         id: crypto.randomUUID(),
         text: todo,
@@ -91,3 +91,13 @@ function deleteTodo(todoId) {
 }
 
 // 一括削除ボタンのイベントリスナー
+purgeButton.addEventListener("click", ()=>{
+    const confirmDelete = confirm("TODOをすべて削除しますか？");
+
+    if(!confirmDelete){
+        return;
+    }
+
+    todos.splice(0, todos.length);
+    displayTodo(todos);
+})

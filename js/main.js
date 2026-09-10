@@ -1,10 +1,10 @@
 "use strict";
 
 const todos = [
-    { text: "aaa", isCompleted: false },
-    { text: "bbb", isCompleted: false },
-    { text: "ccc", isCompleted: false },
-    { text: "ddd", isCompleted: false },
+    { id: 1, text: "aaa", isCompleted: false },
+    { id: 2, text: "bbb", isCompleted: false },
+    { id: 3, text: "ccc", isCompleted: false },
+    { id: 4, text: "ddd", isCompleted: false },
 ];
 
 const todoList = document.querySelector("#todo-list");
@@ -45,6 +45,11 @@ function displayTodo(todos) {
         deleteButton.classList.add("todo-delete-button");
         deleteButton.textContent = "X";
 
+        // 削除ボタンのイベントリスナー
+        deleteButton.addEventListener("click", () => {
+            deleteTodo(todo.id)
+        })
+
         todoItem.append(checkbox, todoText, deleteButton);
         todoList.append(todoItem);
     });
@@ -62,13 +67,27 @@ todoForm.addEventListener("submit", (event) => {
         return;
     }
 
-    todos.push({ text: todo, isCompleted: false });
+    // TODOの長さ取得
+    todos.push({
+        id: crypto.randomUUID(),
+        text: todo,
+        isCompleted: false,
+    });
     displayTodo(todos);
     todoInputField.value = "";
     todoInputField.focus();
 });
 
+// TODO削除
+function deleteTodo(todoId) {
+    const index = todos.findIndex((todo) => todo.id === todoId);
 
-// 削除ボタンのイベントリスナー
+    if (index === -1) {
+        return;
+    }
+
+    todos.splice(index, 1);
+    displayTodo(todos)
+}
 
 // 一括削除ボタンのイベントリスナー

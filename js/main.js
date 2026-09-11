@@ -1,6 +1,6 @@
 "use strict";
 
-const todos = [
+let todos = [
     { id: 1, text: "aaa", isCompleted: false },
     { id: 2, text: "bbb", isCompleted: false },
     { id: 3, text: "ccc", isCompleted: false },
@@ -90,14 +90,15 @@ function deleteTodo(todoId) {
     displayTodo(todos)
 }
 
-// 一括削除ボタンのイベントリスナー
+// 完了済み一括削除ボタンのイベントリスナー
 purgeButton.addEventListener("click", ()=>{
-    const confirmDelete = confirm("TODOをすべて削除しますか？");
+    const confirmDelete = confirm("完了済みTODOをすべて削除しますか？");
 
     if(!confirmDelete){
         return;
     }
-
-    todos.splice(0, todos.length);
+    
+    todos = todos.filter((todo) => !todo.isCompleted);
+    
     displayTodo(todos);
 })
